@@ -37,4 +37,11 @@ int main()
   {
     cout << "The average marks for student : " << i+1 << " : " << avgMarks[i] << endl;
   }
+  for (int i = 0; i < rows; i++)
+{
+    delete[] arr[i];
+}
+  delete[] arr;   
+  delete[] colSize;
+  
 }
