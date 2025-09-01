@@ -1,17 +1,15 @@
-#include "iostream"
+#include"iostream"
 using namespace std;
 int main()
 {
   int rows, cols;
   cout << "Enter number of rows and columns : ";
   cin >> rows >> cols;
-
   int **mat = new int *[rows];
   for (int i = 0; i < rows; i++)
   {
     mat[i] = new int[cols];
   }
-
   cout << "Enter matrix elements : " << endl;
   for (int i = 0; i < rows; i++)
   {
@@ -20,7 +18,6 @@ int main()
       cin >> mat[i][j];
     }
   }
-
   cout << "matrix in normal form : " << endl;
   for (int i = 0; i < rows; i++)
   {
@@ -30,7 +27,6 @@ int main()
     }
     cout << endl;
   }
-
   cout << "matrix in compressed form --- row, column, value ---:" << endl;
   for (int i = 0; i < rows; i++)
   {
@@ -42,12 +38,9 @@ int main()
       }
     }
   }
-
   for (int i = 0; i < rows; i++)
   {
     delete[] mat[i];
   }
   delete[] mat;
-
-  return 0;
 }
