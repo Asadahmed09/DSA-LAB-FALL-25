@@ -1,83 +1,88 @@
-/*1. Palindrome Check in Singly Linked List
-Write a program to check if a singly linked list is a palindrome.
- Input: A singly linked list of integers.
- Output: true if the list reads the same forward and backward, false otherwise.
- Hint: Use a fast/slow pointer to find the middle, then reverse the second half and
-compare.*/
-#include<iostream>
+#include "iostream"
 using namespace std;
 
-class Node
-{
+class node {
 public:
-    Node* next;
     int data;
-    Node(int data)
-    {
-        this->data = data;
+    node* next;
+    node() {
         next = NULL;
     }
 };
 
-Node* FindMiddle(Node* head)
-{
-    Node* slow = head;
-    Node* fast = head;
-    while(fast != NULL && fast->next != NULL)
-    {
-        slow = slow->next;
-        fast = fast->next->next;
+node* middleNode(node* head) {
+    node* slowPtr = head;
+    node* fastPtr = head;
+    while(fastPtr != NULL && fastPtr->next != NULL) {
+        slowPtr = slowPtr->next;
+        fastPtr = fastPtr->next->next;
     }
-    return slow;
+    return slowPtr;
 }
 
-Node* Reverse(Node* head)
-{
-    Node* prev = NULL;
-    Node* curr = head;
-    while(curr != NULL)
-    {
-        Node* nextNode = curr->next;
+void insertNode(node* head, int data) {
+    node* newNode = new node();
+    newNode->data = data;
+
+    while(head->next != NULL) {
+        head = head->next;
+    }
+    head->next = newNode;
+}
+
+void printNodes(node* head) {
+    while(head) {
+        cout << "Data : " << head->data << " - Next Address : " << head->next << endl;
+        head = head->next;
+    }
+}
+
+node* reverseList(node* head) {
+    node* prev = NULL;
+    node* curr = head;
+    node* next = NULL;
+
+    while(curr != NULL) {
+        next = curr->next;
         curr->next = prev;
         prev = curr;
-        curr = nextNode;
+        curr = next;
     }
-    return prev; 
+    return prev;
 }
 
-bool IsPalindrome(Node* head)
-{
-    if(head == NULL || head->next == NULL)
-        return true;
+bool checkPalindrome(node* head) {
+    if(!head || !head->next) return true;
 
-    Node* mid = FindMiddle(head);
-    Node* secondHalf = Reverse(mid);  
+  
+    node* mid = middleNode(head);
 
-    Node* p1 = head;
-    Node* p2 = secondHalf;
+    node* secondHalf = reverseList(mid);
 
-    while(p2 != NULL)
-    {
-        if(p1->data != p2->data)
+    node* firstHalf = head;
+    node* temp = secondHalf;
+
+    while(secondHalf != NULL) {
+        if(firstHalf->data != secondHalf->data) {
             return false;
-        p1 = p1->next;
-        p2 = p2->next;
+        }
+        firstHalf = firstHalf->next;
+        secondHalf = secondHalf->next;
     }
 
     return true;
 }
 
-int main()
-{
-    Node* l1 = new Node(5);
-    Node* l2 = new Node(6);
-    l1->next = l2;
-    Node* l3 = new Node(7);
-    l2->next = l3;
-    Node* l4 = new Node(6);
-    l3->next = l4;
-    Node* l5 = new Node(5);
-    l4->next = l5;
+int main() {
+    node* head = new node();
+    head->data = 1;
+    insertNode(head, 2);
+    insertNode(head, 3);
+    insertNode(head, 2);
+    insertNode(head, 1);
 
-    cout << (IsPalindrome(l1) ? "true" : "false");
+    printNodes(head);
+
+    cout << "Middle node: " << middleNode(head)->data << endl;
+    cout << "Palindrome: " << (checkPalindrome(head) ? "Yes" : "No") << endl;
 }
