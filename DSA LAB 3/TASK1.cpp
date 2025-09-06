@@ -1,7 +1,8 @@
 #include "iostream"
 using namespace std;
 
-class node {
+class node 
+{
 public:
     int data;
     node* next;
@@ -10,39 +11,47 @@ public:
     }
 };
 
-node* middleNode(node* head) {
+node* middleNode(node* head)
+{
     node* slowPtr = head;
     node* fastPtr = head;
-    while(fastPtr != NULL && fastPtr->next != NULL) {
+    while(fastPtr != NULL && fastPtr->next != NULL) 
+    {
         slowPtr = slowPtr->next;
         fastPtr = fastPtr->next->next;
     }
     return slowPtr;
 }
 
-void insertNode(node* head, int data) {
+void insertNode(node* head, int data)
+{
     node* newNode = new node();
     newNode->data = data;
 
-    while(head->next != NULL) {
+    while(head->next != NULL)
+        {
         head = head->next;
     }
     head->next = newNode;
 }
 
-void printNodes(node* head) {
-    while(head) {
+void printNodes(node* head)
+{
+    while(head)
+        {
         cout << "Data : " << head->data << " - Next Address : " << head->next << endl;
         head = head->next;
     }
 }
 
-node* reverseList(node* head) {
+node* reverseList(node* head)
+{
     node* prev = NULL;
     node* curr = head;
     node* next = NULL;
 
-    while(curr != NULL) {
+    while(curr != NULL)
+        {
         next = curr->next;
         curr->next = prev;
         prev = curr;
@@ -51,7 +60,8 @@ node* reverseList(node* head) {
     return prev;
 }
 
-bool checkPalindrome(node* head) {
+bool checkPalindrome(node* head)
+{
     if(!head || !head->next) return true;
 
   
@@ -63,7 +73,8 @@ bool checkPalindrome(node* head) {
     node* temp = secondHalf;
 
     while(secondHalf != NULL) {
-        if(firstHalf->data != secondHalf->data) {
+        if(firstHalf->data != secondHalf->data)
+        {
             return false;
         }
         firstHalf = firstHalf->next;
@@ -73,7 +84,8 @@ bool checkPalindrome(node* head) {
     return true;
 }
 
-int main() {
+int main()
+{
     node* head = new node();
     head->data = 1;
     insertNode(head, 2);
