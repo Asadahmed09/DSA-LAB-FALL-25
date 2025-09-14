@@ -4,7 +4,7 @@ void BubbleSort(int arr[], int size)
 {
   for (int i = 0; i < size; i++)
   {
-    for (int j = 0; j < i; j++)
+    for (int j = i + 1; j < size; j++)
     {
       if (arr[j] > arr[i])
       {
@@ -22,7 +22,7 @@ int main()
     cout << arr[i] << " ";
   }
 
-  BubbleSort(arr,sizeof(arr)/4);
+  BubbleSort(arr, sizeof(arr) / 4);
   cout << endl;
   cout << "After Sorting :";
   for (int i = 0; i < sizeof(arr) / 4; i++)
